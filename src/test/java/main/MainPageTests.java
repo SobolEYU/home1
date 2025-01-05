@@ -24,7 +24,7 @@ public class MainPageTests  {
     private HeaderPage headerPage;
 
     private static final String LESSONS_URL = "/catalog/courses";
-    private static final String LESSON_TO_FIND = "JavaScript Developer. Basic";
+    private static final String LESSON_TO_FIND = "C++ Developer. Basic";
 
 
     @Test
