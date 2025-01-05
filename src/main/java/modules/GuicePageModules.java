@@ -1,51 +1,41 @@
 package modules;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Inject;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import factory.WebDriverFactory;
-import org.openqa.selenium.WebDriver;
 import pages.HeaderPage;
 import pages.LessonPage;
 import pages.LessonsListPage;
 import pages.MainPage;
+import scopeds.GuiceScoped;
 
 public class GuicePageModules extends AbstractModule {
 
-    private WebDriver webDriver = createWebDriver();
-
-    @Provides
-    private WebDriver getDriver() {
-        return webDriver;
-    }
-
-    private WebDriver createWebDriver() {
-        WebDriver driver = new WebDriverFactory().create();
-        driver.manage().window().maximize();
-        return driver;
-    }
+    @Inject
+    private GuiceScoped guiceScoped;
 
     @Singleton
     @Provides
     public MainPage getMainPage() {
-        return new MainPage(getDriver());
+        return new MainPage(guiceScoped);
     }
 
     @Singleton
     @Provides
     public LessonsListPage getLessonsListPage() {
-        return new LessonsListPage(getDriver());
+        return new LessonsListPage(guiceScoped);
     }
 
     @Singleton
     @Provides
     public HeaderPage getHeaderPage() {
-        return new HeaderPage(getDriver());
+        return new HeaderPage(guiceScoped);
     }
 
     @Singleton
     @Provides
     public LessonPage getLessonPage() {
-        return new LessonPage(getDriver());
+        return new LessonPage(guiceScoped);
     }
 }

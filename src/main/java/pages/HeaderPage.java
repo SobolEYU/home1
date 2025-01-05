@@ -2,16 +2,18 @@ package pages;
 
 import java.util.List;
 import java.util.Random;
+import com.google.inject.Inject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import scopeds.GuiceScoped;
 
 //header который есть на каждой странице
 public class HeaderPage extends AbsBasePage<HeaderPage> {
 
-    public HeaderPage(WebDriver webDriver) {
-        super(webDriver);
+    @Inject
+    public HeaderPage(GuiceScoped guiceScoped) {
+        super(guiceScoped);
     }
 
     //вкладка Обучение

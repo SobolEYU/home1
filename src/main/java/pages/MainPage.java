@@ -1,12 +1,14 @@
 package pages;
 
-import org.openqa.selenium.WebDriver;
+import com.google.inject.Inject;
+import scopeds.GuiceScoped;
 
 //главная страница
 public class MainPage extends AbsBasePage<MainPage> {
 
-    public MainPage(WebDriver webDriver) {
-        super(webDriver);
+    @Inject
+    public MainPage(GuiceScoped guiceScoped) {
+        super(guiceScoped);
     }
 
 

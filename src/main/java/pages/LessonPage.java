@@ -7,16 +7,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import com.google.inject.Inject;
 import model.LessonsCards;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import scopeds.GuiceScoped;
 
 //страница с курсами
 public class LessonPage extends AbsBasePage<LessonPage> {
 
-    public LessonPage(WebDriver webDriver) {
-        super(webDriver);
+    @Inject
+    public LessonPage(GuiceScoped guiceScoped) {
+        super(guiceScoped);
     }
 
     //заголовок с названием курса

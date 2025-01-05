@@ -5,20 +5,20 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import com.google.inject.Inject;
 import model.LessonsCards;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import scopeds.GuiceScoped;
 
 //страница с курсами
 public class LessonsListPage extends AbsBasePage<LessonsListPage> {
 
-    public LessonsListPage(WebDriver webDriver) {
-        super(webDriver);
+    @Inject
+    public LessonsListPage(GuiceScoped guiceScoped) {
+        super(guiceScoped);
     }
-
-    private LessonPage lessonPage = new LessonPage(webDriver);
 
     //список курсов
     @FindBy(xpath = "//section//a[contains(@href,'lessons') and .//span]")

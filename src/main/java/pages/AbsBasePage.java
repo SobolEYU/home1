@@ -1,19 +1,19 @@
 package pages;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
-import org.openqa.selenium.WebDriver;
+import com.google.inject.Inject;
+import common.AbsCommon;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import common.AbsCommon;
+import scopeds.GuiceScoped;
 
 public class AbsBasePage<T> extends AbsCommon<T> {
 
     private static final String BASE_URL = "https://otus.ru";
 
-    public AbsBasePage(WebDriver webDriver) {
-        super(webDriver);
+    @Inject
+    public AbsBasePage(GuiceScoped guiceScoped) {
+        super(guiceScoped);
     }
 
     @FindBy(css = ".__jivoDesktopButton")

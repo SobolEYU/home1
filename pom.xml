@@ -15,6 +15,7 @@
 
 <!--        versions-->
         <junit.ver>5.11.3</junit.ver>
+        <junit.platform.ver>1.11.4</junit.platform.ver>
         <selenium.ver>4.27.0</selenium.ver>
         <webdrivermanager.ver>5.9.2</webdrivermanager.ver>
         <assertj.ver>3.26.0</assertj.ver>
@@ -23,14 +24,26 @@
         <compilerPlugin.ver>3.13.0</compilerPlugin.ver>
         <checkstylePlugin.ver>3.4.0</checkstylePlugin.ver>
         <spotbugsPlugin.ver>4.8.6.6</spotbugsPlugin.ver>
+        <cucumber.ver>7.20.0</cucumber.ver>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-engine</artifactId>
+            <version>${junit.platform.ver}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.ver}</version>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.ver}</version>
         </dependency>
+
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
@@ -50,6 +63,21 @@
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
             <version>${guice.ver}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.ver}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-guice</artifactId>
+            <version>${cucumber.ver}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <version>${cucumber.ver}</version>
         </dependency>
     </dependencies>
 
