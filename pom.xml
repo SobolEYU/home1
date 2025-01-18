@@ -53,6 +53,18 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <base.url>https://otus.ru</base.url>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <plugin>
@@ -62,6 +74,7 @@
                 <configuration>
                     <systemPropertyVariables>
                         <browser>chrome</browser>
+                        <base.url>${base.url}</base.url>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

@@ -21,7 +21,7 @@ public class LessonsListPage extends AbsBasePage<LessonsListPage> {
     private LessonPage lessonPage = new LessonPage(webDriver);
 
     //список курсов
-    @FindBy(xpath = "//section//a[contains(@href,'lessons') and .//span]")
+    @FindBy(xpath = "//section//a[contains(@href,'lessons') and .//p]")
     private List<WebElement> lessons;
 
     //фильтр по списку категорий
@@ -40,11 +40,8 @@ public class LessonsListPage extends AbsBasePage<LessonsListPage> {
             String date = it.findElements(By.xpath(".//div[text() != '']")).get(1).getText();
             return new LessonsCards(name, date, it.getDomAttribute("href"));
         }).toList();
-        expectedLessonsCards = expectedLessonsCards.stream()
-                .sorted(Comparator.comparing(LessonsCards::getDate))
-                .toList();
-        LocalDate min = expectedLessonsCards.get(0).getDate();
-        LocalDate max = expectedLessonsCards.get(expectedLessonsCards.size() - 1).getDate();
+        LocalDate min = expectedLessonsCards.stream().map(LessonsCards::getDate).reduce((it1, it2) -> it1.isBefore(it2) ? it1 : it2).orElse(null);
+        LocalDate max = expectedLessonsCards.stream().map(LessonsCards::getDate).reduce((it1, it2) -> it1.isBefore(it2) ? it2 : it1).orElse(null);
         expectedLessonsCards = expectedLessonsCards.stream()
                 .filter(it -> it.getDate().equals(min) || it.getDate().equals(max))
                 .toList();

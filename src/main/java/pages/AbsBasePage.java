@@ -1,16 +1,15 @@
 package pages;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
+import common.AbsCommon;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import common.AbsCommon;
 
-public class AbsBasePage<T> extends AbsCommon<T> {
+abstract public class AbsBasePage<T> extends AbsCommon<T> {
 
-    private static final String BASE_URL = "https://otus.ru";
+    private static final String BASE_URL = System.getProperty("base.url");
+    private static Boolean cookiePopupClosed = false;
 
     public AbsBasePage(WebDriver webDriver) {
         super(webDriver);
@@ -19,14 +18,23 @@ public class AbsBasePage<T> extends AbsCommon<T> {
     @FindBy(css = ".__jivoDesktopButton")
     private WebElement chatBot;
 
+    @FindBy(xpath = "//button[@font-style='bold']")
+    private WebElement cookiePopup;
+
     public T open(String url) {
         webDriver.get(BASE_URL + url);
+        if (!cookiePopupClosed) {
+            waiters.waitElementToBeClickable(cookiePopup);
+            cookiePopup.click();
+            cookiePopupClosed = true;
+        }
         return (T) this;
     }
 
     public T open() {
         webDriver.get(BASE_URL);
         waiters.waitElementIsVisible(chatBot);
+        cookiePopup.click();
         return (T) this;
     }
 

@@ -29,4 +29,7 @@ public class Waiters {
         return waiter(10L, ExpectedConditions.visibilityOf(element));
     }
 
+    public boolean waitElementToBeClickable(WebElement element) {
+        return waiter(10L, ExpectedConditions.elementToBeClickable(element));
+    }
 }
