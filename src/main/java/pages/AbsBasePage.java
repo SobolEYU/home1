@@ -24,7 +24,7 @@ abstract public class AbsBasePage<T> extends AbsCommon<T> {
     public T open(String url) {
         webDriver.get(BASE_URL + url);
         if (!cookiePopupClosed) {
-            waiters.waitElementToBeClickable(cookiePopup);
+            waiters.waitVisibleElementToBeClickable(cookiePopup);
             cookiePopup.click();
             cookiePopupClosed = true;
         }
