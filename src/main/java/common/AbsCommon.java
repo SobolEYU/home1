@@ -1,7 +1,5 @@
 package common;
 
-import com.google.inject.Guice;
-import modules.GuicePageModules;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import waiters.Waiters;

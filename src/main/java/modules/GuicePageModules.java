@@ -12,10 +12,13 @@ import pages.MainPage;
 
 public class GuicePageModules extends AbstractModule {
 
-    private WebDriver webDriver = createWebDriver();
+    private WebDriver webDriver;
 
     @Provides
     private WebDriver getDriver() {
+        if (webDriver == null) {
+            webDriver = createWebDriver();
+        }
         return webDriver;
     }
 

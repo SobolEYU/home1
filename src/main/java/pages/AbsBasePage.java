@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 abstract public class AbsBasePage<T> extends AbsCommon<T> {
 
     private static final String BASE_URL = System.getProperty("base.url");
-    private static Boolean cookiePopupClosed = false;
 
     public AbsBasePage(WebDriver webDriver) {
         super(webDriver);
@@ -23,23 +22,33 @@ abstract public class AbsBasePage<T> extends AbsCommon<T> {
 
     public T open(String url) {
         webDriver.get(BASE_URL + url);
-        if (!cookiePopupClosed) {
-            waiters.waitVisibleElementToBeClickable(cookiePopup);
-            cookiePopup.click();
-            cookiePopupClosed = true;
-        }
+        cookieClick();
         return (T) this;
     }
 
     public T open() {
         webDriver.get(BASE_URL);
-        waiters.waitElementIsVisible(chatBot);
-        cookiePopup.click();
+        cookieClick();
         return (T) this;
     }
 
-    public void moveToElement(WebElement element) {
+    public T openNoCookie(String url) {
+        webDriver.get(BASE_URL + url);
+        return (T) this;
+    }
+
+    public WebElement moveToElement(WebElement element) {
         Actions action = new Actions(webDriver);
         action.moveToElement(element).perform();
+        return element;
+    }
+
+    private void cookieClick() {
+        waiters.waitVisibleElementToBeClickable(cookiePopup);
+        try {
+            cookiePopup.click();
+        } catch (Exception e) {
+            cookiePopup.click();
+        }
     }
 }

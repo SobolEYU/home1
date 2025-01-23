@@ -29,6 +29,7 @@ public class LessonPage extends AbsBasePage<LessonPage> {
 
     public LessonsCards getLessonInfo() {
         LocalDate dateFrom;
+        waiters.waitElementIsVisible(dateStart);
         String dateFromText = dateStart.getText().replace("Старт занятий ", "");
         String nameLesson = header.getText();
         int countSpaces = dateFromText.length() - dateFromText.replace(" ", "").length();
@@ -50,7 +51,7 @@ public class LessonPage extends AbsBasePage<LessonPage> {
     public void checkFirstAndLastLessons(List<LessonsCards> expectedLessonsCards) {
         ArrayList<LessonsCards> actualLessons = new ArrayList<>();
         for (LessonsCards lesson: expectedLessonsCards) {
-            open(lesson.getUrl());
+            openNoCookie(lesson.getUrl());
             actualLessons.add(getLessonInfo());
         }
         assertThat(actualLessons.equals(expectedLessonsCards))

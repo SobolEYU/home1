@@ -22,8 +22,9 @@ public class HeaderPage extends AbsBasePage<HeaderPage> {
         moveToElement(learning);
         List<WebElement> categories = webDriver.findElements(By.xpath("//nav//a[contains(@href,'categories')]"));
         WebElement selectedCategory = categories.get(new Random().nextInt(0, categories.size()));
+        System.out.println("Выбрана категория: " + selectedCategory.getText());
         String selectedCategoryName = selectedCategory.getText().substring(0, selectedCategory.getText().indexOf(" ("));
-        selectedCategory.click();
+        moveToElement(selectedCategory).click();
         return selectedCategoryName;
     }
 }

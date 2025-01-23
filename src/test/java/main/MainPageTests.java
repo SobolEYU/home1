@@ -7,10 +7,13 @@ import model.LessonsCards;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import pages.HeaderPage;
 import pages.LessonPage;
 import pages.LessonsListPage;
 
+@Execution(ExecutionMode.CONCURRENT)
 @ExtendWith(BaseExtensions.class)
 public class MainPageTests  {
 
@@ -25,7 +28,6 @@ public class MainPageTests  {
 
     private static final String LESSONS_URL = "/catalog/courses";
     private static final String LESSON_TO_FIND = "QA Lead";
-
 
     @Test
     @DisplayName("Сценарий 1")

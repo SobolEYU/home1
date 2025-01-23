@@ -10,6 +10,7 @@ public class ChromeParameters implements IBrowserOptions {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("no-sandbox");
         options.addArguments("disable-gpu");
+        options.setCapability("browserName", "chrome");
     return options;
     }
 }

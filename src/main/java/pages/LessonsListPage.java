@@ -3,7 +3,6 @@ package pages;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.time.LocalDate;
-import java.util.Comparator;
 import java.util.List;
 import model.LessonsCards;
 import org.openqa.selenium.By;
@@ -31,6 +30,7 @@ public class LessonsListPage extends AbsBasePage<LessonsListPage> {
     //ищем и переходим в курс по его имени
     public void selectLessonByName(String name) {
         List<WebElement> lessonsByName = lessons.stream().filter(it -> it.getText().contains(name)).toList();
+        waiters.waitVisibleElementToBeClickable(lessonsByName.get(0));
         lessonsByName.get(0).click();
     }
 
