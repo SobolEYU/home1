@@ -1,0 +1,56 @@
+services:
+  selenoid:
+    image: aerokube/selenoid:1.11.3
+    container_name: selenoid
+    networks:
+      - selenoid
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/jeckcomp/browsers.json:/etc/selenoid/browsers.json:ro
+    command: -container-network=selenoid -limit 10 -listen :4444
+
+  ggr:
+    image: aerokube/ggr:1.7.2
+    container_name: ggr
+    depends_on: [selenoid]
+    ports:
+      - 4444:4444
+    volumes:
+      - /etc/grid-router:/etc/grid-router:ro
+    command: -guests-allowed -guests-quota "test" -verbose -quotaDir /etc/grid-router/quota -listen :4444
+    networks:
+      - selenoid
+
+  ggr-ui:
+    image: aerokube/ggr-ui:1.2.0
+    container_name: ggr-ui
+    depends_on: [ggr]
+    volumes:
+      - /etc/grid-router/quota/:/etc/grid-router/quota:ro
+    networks:
+      - selenoid
+
+  selenoid-ui:
+    image: aerokube/selenoid-ui:1.10.11
+    container_name: selenoid-ui
+    depends_on: [ggr-ui]
+    ports:
+      - 8080:8080
+    networks:
+      - selenoid
+    command: --selenoid-uri http://ggr-ui:8888
+
+  nginx:
+    image: nginx:latest
+    depends_on: [ggr, selenoid-ui]
+    ports:
+      - 80:80
+    volumes:
+      - /home/jeckcomp/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    container_name: nginx
+    networks:
+      - selenoid
+
+networks:
+  selenoid:
+    name: selenoid

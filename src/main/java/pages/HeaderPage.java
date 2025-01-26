@@ -3,6 +3,7 @@ package pages;
 import java.util.List;
 import java.util.Random;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +20,8 @@ public class HeaderPage extends AbsBasePage<HeaderPage> {
     private WebElement learning;
 
     public String selectRandomLessonCategory() {
+        JavascriptExecutor js = (JavascriptExecutor) webDriver;
+        js.executeScript("window.scrollTo(0, 0);");
         moveToElement(learning);
         List<WebElement> categories = webDriver.findElements(By.xpath("//nav//a[contains(@href,'categories')]"));
         WebElement selectedCategory = categories.get(new Random().nextInt(0, categories.size()));

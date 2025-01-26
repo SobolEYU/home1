@@ -5,6 +5,7 @@ import java.net.URL;
 import exceptions.BrowserNotFoundException;
 import factory.options.ChromeParameters;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 

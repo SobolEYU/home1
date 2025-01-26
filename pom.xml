@@ -58,7 +58,7 @@
             <id>dev</id>
             <properties>
                 <base.url>https://otus.ru</base.url>
-                <selenoid.url>http://51.250.46.96/wd/hub</selenoid.url>
+                <selenoid.url>http://158.160.133.141/wd/hub</selenoid.url>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
