@@ -59,6 +59,7 @@
             <properties>
                 <base.url>https://otus.ru</base.url>
                 <selenoid.url>http://158.160.133.141/wd/hub</selenoid.url>
+                <mobile>N</mobile>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -77,6 +78,7 @@
                         <browser>chrome</browser>
                         <base.url>${base.url}</base.url>
                         <selenoid.url>${selenoid.url}</selenoid.url>
+                        <mobile>${mobile}</mobile>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

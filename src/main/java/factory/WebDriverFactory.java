@@ -11,8 +11,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class WebDriverFactory {
 
-    private String browserName = System.getProperty("browser");
-    private URL selenoidUrl;
+    private final String browserName = System.getProperty("browser");
+    private final URL selenoidUrl;
 
     public WebDriverFactory() {
         try {
@@ -27,7 +27,7 @@ public class WebDriverFactory {
             case "CHROME":
                 ChromeOptions options = (ChromeOptions) new ChromeParameters().browserOptions();
                 return new RemoteWebDriver(selenoidUrl, options);
-                //return new ChromeDriver();
+                //return new ChromeDriver(options);
             default:
                 throw new BrowserNotFoundException();
         }
